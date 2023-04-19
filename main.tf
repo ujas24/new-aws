@@ -60,14 +60,14 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
 
 data "archive_file" "zip_the_python_code" {
  type        = "zip"
- source_dir  = "${path.module}/python/"
- output_path = "${path.module}/python/hello-python.zip"
+ source_dir  = "${path.module}/"
+ output_path = "${path.module}/hello-python.zip"
 }
 
 # Create a lambda function
 # In terraform ${path.module} is the current directory.
 resource "aws_lambda_function" "terraform_lambda_func" {
- filename                       = "${path.module}/python/hello-python.zip"
+ filename                       = "${path.module}/hello-python.zip"
  function_name                  = "Jhooq-Lambda-Function"
  role                           = aws_iam_role.lambda_role.arn
  handler                        = "hello-python.lambda_handler"
